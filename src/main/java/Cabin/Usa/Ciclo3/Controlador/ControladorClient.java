@@ -1,20 +1,12 @@
 package Cabin.Usa.Ciclo3.Controlador;
 
 import Cabin.Usa.Ciclo3.Modelo.Cliente;
-import Cabin.Usa.Ciclo3.Servicios.Servicios;
+import Cabin.Usa.Ciclo3.Servicios.ClientServices;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/Client")
@@ -22,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ControladorClient {
     
     @Autowired
-    private Servicios ClienteServices;
+    private ClientServices ClienteServices;
     
     @GetMapping("/all")
     public List<Cliente> MostrarClientes(){

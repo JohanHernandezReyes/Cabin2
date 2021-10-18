@@ -8,20 +8,22 @@ import lombok.Data;
 
 
 @Entity
-@Table(name="categoria")
+@Table(name="message")
 @Data
-public class Categoria implements Serializable{
-    
+public class Message implements Serializable{
+
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
-    @Column(length = 45)
-    private String name;
-    @Column(length = 250)
-    private String description;
     
-    @OneToMany(cascade={CascadeType.PERSIST}, mappedBy="category_id")
-    @JsonIgnoreProperties("category_id")
-    public List<Cabin> cabins;
-        
+    @Column(length = 250)
+    private String txtmessage;
+    
+    @ManyToOne
+    @JoinColumn(name="cabin_id")
+    @JsonIgnoreProperties("cabinsmessages")
+    private Cabin cabin_id; 
+           
+  
 }
+

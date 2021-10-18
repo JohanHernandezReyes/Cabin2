@@ -13,20 +13,23 @@ public class ClientServices {
     @Autowired
     private ClientRepository ClientRepository;
     
+ 
     public List <Cliente> MostrarCliente(){
-        return ClientRepository.MostrarClientes();
+        return (List<Cliente>) ClientRepository.MostrarClientes();
     }    
     
+ 
     public Optional<Cliente> BuscarCliente(int id){
         return ClientRepository.BuscarCliente(id);
     }
     
+
     public Cliente GuardarCliente(Cliente C){
-        if (C.getId()==null){
+        if (C.getId()>0){
             return ClientRepository.GuardarCliente(C);
         }else{
             Optional<Cliente> ClientX=ClientRepository.BuscarCliente(C.getId());
-            if(ClientX.equals("")){
+            if(ClientX == null){
                 return ClientRepository.GuardarCliente(C);
             } else {
                 return C;

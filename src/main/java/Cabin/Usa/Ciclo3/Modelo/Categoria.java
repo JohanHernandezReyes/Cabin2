@@ -20,8 +20,8 @@ public class Categoria implements Serializable{
     @Column(length = 250)
     private String description;
     
-    @OneToMany(cascade={CascadeType.PERSIST}, mappedBy="category_id")
-    @JsonIgnoreProperties("category_id")
+    @OneToMany(cascade={CascadeType.PERSIST}, mappedBy="category")
+    @JsonIgnoreProperties("category")
     public List<Cabin> cabins;
         
 }

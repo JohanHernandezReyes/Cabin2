@@ -17,24 +17,25 @@ public class Cabin implements Serializable{
     private Integer id;
     
     @Column(length = 45)
-    private String brand;
-    @Column(length = 45)
     private String name;
+    @Column(length = 45)
+    private String brand;
+    private Integer rooms;
     @Column(length = 250)
     private String description;
-    private Integer rooms;
+    
     
     @ManyToOne
-    @JoinColumn(name="category_id")
+    @JoinColumn(name="category")
     @JsonIgnoreProperties("cabins")
-    private Categoria category_id; 
+    private Categoria category; 
     
-    @OneToMany(cascade={CascadeType.PERSIST}, mappedBy="cabin_id")
-    @JsonIgnoreProperties("cabin_id")
-    public List<Message> cabinsmessages;
+    @OneToMany(cascade={CascadeType.PERSIST}, mappedBy="cabin")
+    @JsonIgnoreProperties({"cabin", "client"})
+    public List<Message> messages;
     
-    @OneToMany(cascade={CascadeType.PERSIST}, mappedBy="cabin_id")
-    @JsonIgnoreProperties("cabin_id")
-    public List<Reservation> cabinsreservations;
+    @OneToMany(cascade={CascadeType.PERSIST}, mappedBy="cabin")
+    @JsonIgnoreProperties({"cabin", "messages"})
+    public List<Reservation> reservations;
     
 }

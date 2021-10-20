@@ -25,11 +25,11 @@ public class UsersServices {
     
 
     public Users GuardarUser(Users U){
-        if (U.getId()>0){
+        if (U.getId()==null){
             return UsersRepository.GuardarUsuario(U);
         }else{
             Optional<Users> UserX=UsersRepository.BuscarUsuario(U.getId());
-            if(UserX == null){
+            if(!UserX.isPresent()){
                 return UsersRepository.GuardarUsuario(U);
             } else {
                 return U;

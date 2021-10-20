@@ -22,11 +22,11 @@ public class CabinServices {
     }
     
     public Cabin GuardarCabaña(Cabin C){
-        if (C.getId()>0){
+        if (C.getId()==null){
             return CabinRepository.GuardarCabaña(C);
         }else{
             Optional<Cabin> CabinX=CabinRepository.BuscarCabaña(C.getId());
-            if(CabinX==null){
+            if(!CabinX.isPresent()){
                 return CabinRepository.GuardarCabaña(C);
             } else {
                 return C;

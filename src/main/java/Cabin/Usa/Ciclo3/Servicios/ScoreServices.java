@@ -25,11 +25,11 @@ public class ScoreServices {
     
 
     public Score GuardarScore(Score S){
-        if (S.getId()>0){
+        if (S.getId()==null){
             return ScoreRepository.GuardarScore(S);
         }else{
             Optional<Score> ScoreX=ScoreRepository.BuscarScore(S.getId());
-            if(ScoreX == null){
+            if(!ScoreX.isPresent()){
                 return ScoreRepository.GuardarScore(S);
             } else {
                 return S;

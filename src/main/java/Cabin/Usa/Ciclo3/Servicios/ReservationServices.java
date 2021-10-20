@@ -25,11 +25,11 @@ public class ReservationServices {
     
 
     public Reservation GuardarReservacion(Reservation R){
-        if (R.getId()>0){
+        if (R.getIdReservation()==null){
             return ReservationRepository.GuardarReservacion(R);
         }else{
-            Optional<Reservation> ReservationX=ReservationRepository.BuscarReservacion(R.getId());
-            if(ReservationX == null){
+            Optional<Reservation> ReservationX=ReservationRepository.BuscarReservacion(R.getIdReservation());
+            if(!ReservationX.isPresent()){
                 return ReservationRepository.GuardarReservacion(R);
             } else {
                 return R;

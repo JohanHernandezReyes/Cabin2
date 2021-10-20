@@ -25,11 +25,11 @@ public class MessageServices {
     
 
     public Message GuardarMensaje(Message M){
-        if (M.getId()>0){
+        if (M.getIdMessage()==null){
             return MessageRepository.GuardarMensaje(M);
         }else{
-            Optional<Message> MessageX=MessageRepository.BuscarMensaje(M.getId());
-            if(MessageX == null){
+            Optional<Message> MessageX=MessageRepository.BuscarMensaje(M.getIdMessage());
+            if(!MessageX.isPresent()){
                 return MessageRepository.GuardarMensaje(M);
             } else {
                 return M;

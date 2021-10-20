@@ -22,11 +22,11 @@ public class CategoryServices {
     }
     
     public Categoria GuardarCategoria(Categoria C){
-        if (C.getId()>0){
+        if (C.getId()==null){
             return CategoryRepository.GuardarCategoria(C);
         }else{
             Optional<Categoria> CategoryX=CategoryRepository.BuscarCategoria(C.getId());
-            if(CategoryX==null){
+            if(!CategoryX.isPresent()){
                 return CategoryRepository.GuardarCategoria(C);
             } else {
                 return C;

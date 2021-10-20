@@ -24,9 +24,8 @@ public class Score implements Serializable{
     @Column(length = 250)
     private String mensajecalif;
     
-    @ManyToOne
-    @JoinColumn(name="reservation")
-    @JsonIgnoreProperties("calificaciones")
+    @OneToOne
+    @JsonIgnoreProperties("score")
     private Reservation reservation; 
         
   

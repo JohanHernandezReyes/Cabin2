@@ -25,11 +25,11 @@ public class ClientServices {
     
 
     public Cliente GuardarCliente(Cliente C){
-        if (C.getId()>0){
+        if (C.getIdClient()==null){
             return ClientRepository.GuardarCliente(C);
         }else{
-            Optional<Cliente> ClientX=ClientRepository.BuscarCliente(C.getId());
-            if(ClientX == null){
+            Optional<Cliente> ClientX=ClientRepository.BuscarCliente(C.getIdClient());
+            if(!ClientX.isPresent()){
                 return ClientRepository.GuardarCliente(C);
             } else {
                 return C;

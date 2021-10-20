@@ -15,27 +15,27 @@ public class Reservation implements Serializable{
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Integer id;
+    private Integer idReservation;
      
     @Temporal(javax.persistence.TemporalType.DATE)
-    private Date fechainicio;
+    private Date startDate;
     
     @Temporal(javax.persistence.TemporalType.DATE)
-    private Date fechaentrega;
+    private Date devolutionDate;
     
     @ManyToOne
-    @JoinColumn(name="cabin_id")
-    @JsonIgnoreProperties("cabinsreservations")
-    private Cabin cabin_id; 
+    @JoinColumn(name="cabin")
+    @JsonIgnoreProperties("reservations")
+    private Cabin cabin; 
            
     @ManyToOne
-    @JoinColumn(name="client_id")
-    @JsonIgnoreProperties("clientsreservations")
-    private Cliente client_id; 
+    @JoinColumn(name="client")
+    @JsonIgnoreProperties({"reservations","messages"})
+    private Cliente client; 
     
-       
-    @OneToMany(cascade={CascadeType.PERSIST}, mappedBy="score")
-    @JsonIgnoreProperties("score")
-    public List<Score> calificaciones;
+        
+    @OneToOne(cascade = {CascadeType.REMOVE},mappedBy="reservation")
+    @JsonIgnoreProperties("reservation")
+    private Score score;
   
 }

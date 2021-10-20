@@ -2,7 +2,6 @@ package Cabin.Usa.Ciclo3.Modelo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.*;
 import lombok.Data;
 
@@ -14,16 +13,21 @@ public class Message implements Serializable{
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Integer id;
+    private Integer idMessage;
     
     @Column(length = 250)
-    private String txtmessage;
+    private String messageText;
     
     @ManyToOne
-    @JoinColumn(name="cabin_id")
-    @JsonIgnoreProperties("cabinsmessages")
-    private Cabin cabin_id; 
-           
+    @JoinColumn(name="cabin")
+    @JsonIgnoreProperties({"messages", "reservations"})
+    private Cabin cabin; 
+    
+    @ManyToOne
+    @JoinColumn(name="client")
+    @JsonIgnoreProperties({"messages", "reservations"})
+    private Cliente client;
+    
   
 }
 

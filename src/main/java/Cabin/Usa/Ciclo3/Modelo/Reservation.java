@@ -17,11 +17,14 @@ public class Reservation implements Serializable{
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer idReservation;
      
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date startDate;
     
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date devolutionDate;
+    
+    @Column(name="status")
+    private String status="created";
     
     @ManyToOne
     @JoinColumn(name="cabin")

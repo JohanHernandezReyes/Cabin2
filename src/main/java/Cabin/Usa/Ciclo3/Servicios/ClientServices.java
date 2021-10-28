@@ -35,5 +35,31 @@ public class ClientServices {
                 return C;
             }     
         }
-    }  
+    } 
+    
+    public Cliente ActualizarCliente(Cliente C){
+        if (C.getIdClient()!=null){
+            Optional<Cliente> ClienteX=ClientRepository.BuscarCliente(C.getIdClient());
+            if (ClienteX.isPresent()){
+                if(C.getPassword()!=null && C.getName()!=null && C.getAge()!=null && C.getEmail()!=null){
+                    ClienteX.get().setEmail(C.getEmail());
+                    ClienteX.get().setPassword(C.getPassword());
+                    ClienteX.get().setName(C.getName());
+                    ClienteX.get().setAge(C.getAge());
+                }
+                return ClientRepository.GuardarCliente(ClienteX.get());
+            }
+        }    
+        return C;
+    }
+    
+    public boolean EliminarCliente(int id){
+         Optional<Cliente> ClienteX=BuscarCliente(id);
+         if(ClienteX.isPresent()){
+            ClientRepository.EliminarCliente(id);
+            return true;
+        }
+        return false;  
+    }   
+    
 }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/Admin")
-@CrossOrigin(origins="*", methods={RequestMethod.GET, RequestMethod.POST})
+@CrossOrigin(origins="*", methods={RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class ControladorUsers {
     
     @Autowired
@@ -25,11 +25,22 @@ public class ControladorUsers {
     public Optional<Users> BuscarUser(@PathVariable("id") int id){
         return UsersServices.BuscarUser(id);
     }
-    
-    
+   
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
     public Users GuardarUser(@RequestBody Users U){
         return UsersServices.GuardarUser(U);
+    }
+    
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Users ActualizarUser(@RequestBody Users U){
+        return UsersServices.ActualizarUser(U);
+    }
+    
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean BorrarUser(@PathVariable("id") int id){
+        return UsersServices.EliminarUser(id);
     }
 }

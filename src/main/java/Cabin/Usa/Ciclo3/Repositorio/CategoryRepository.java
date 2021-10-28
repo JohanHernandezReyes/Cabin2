@@ -24,4 +24,8 @@ public class CategoryRepository {
         return CategoryCRUD.save(C);
     }
    
+    public void EliminarCategoria(int id){
+        CategoryCRUD.deleteById(id);
+    }
+    
 }

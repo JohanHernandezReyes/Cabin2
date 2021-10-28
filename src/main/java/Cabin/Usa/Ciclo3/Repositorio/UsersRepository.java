@@ -23,5 +23,8 @@ public class UsersRepository {
     public Users GuardarUsuario(Users U){
         return UsersCRUD.save(U);
     }
-   
+    
+    public void EliminarUsuario(int id){
+        UsersCRUD.deleteById(id);
+    }
 }

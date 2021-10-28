@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/Category")
-@CrossOrigin(origins="*", methods={RequestMethod.GET, RequestMethod.POST})
+@CrossOrigin(origins="*", methods={RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class ControladorCategory {
     
     @Autowired
@@ -25,11 +25,22 @@ public class ControladorCategory {
     public Optional<Categoria> BuscarCategorias(@PathVariable("id") int id){
         return CategoryServices.BuscarCategoria(id);
     }
-    
-    
+   
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
     public Categoria GuardarCategoria(@RequestBody Categoria C){
         return CategoryServices.GuardarCategoria(C);
+    }
+
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Categoria ActualizarCabaña(@RequestBody Categoria C){
+        return CategoryServices.ActualizarCategoria(C);
+    }
+    
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean BorrarCabaña(@PathVariable("id") int id){
+        return CategoryServices.EliminarCategoria(id);
     }
 }

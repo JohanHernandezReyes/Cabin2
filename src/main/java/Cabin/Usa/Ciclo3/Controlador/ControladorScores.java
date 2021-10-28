@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/Score")
-@CrossOrigin(origins="*", methods={RequestMethod.GET, RequestMethod.POST})
+@CrossOrigin(origins="*", methods={RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class ControladorScores {
     
     @Autowired
@@ -26,10 +26,21 @@ public class ControladorScores {
         return ScoreServices.BuscarScore(id);
     }
     
-    
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
     public Score GuardarScore(@RequestBody Score S){
         return ScoreServices.GuardarScore(S);
+    }
+    
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Score ActualizarScore(@RequestBody Score S){
+        return ScoreServices.ActualizarScore(S);
+    }
+    
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean BorrarScore(@PathVariable("id") int id){
+        return ScoreServices.EliminarScore(id);
     }
 }

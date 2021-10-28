@@ -24,4 +24,8 @@ public class CabinRepository {
         return CabinCRUD.save(C);
     }
    
+    public void EliminarCabaña(int id){
+        CabinCRUD.deleteById(id);
+    }
+    
 }

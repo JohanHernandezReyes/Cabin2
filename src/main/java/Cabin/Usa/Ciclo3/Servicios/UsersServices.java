@@ -35,5 +35,29 @@ public class UsersServices {
                 return U;
             }     
         }
-    }  
+    }
+    
+    public Users ActualizarUser(Users U){
+        if (U.getId()!=null){
+            Optional<Users> UserX=UsersRepository.BuscarUsuario(U.getId());
+            if (UserX.isPresent()){
+                if(U.getPassword()!=null && U.getNameuser()!=null && U.getEmail()!=null){
+                    UserX.get().setNameuser(U.getNameuser());
+                    UserX.get().setEmail(U.getEmail());
+                    UserX.get().setPassword(U.getPassword());
+                }
+                return UsersRepository.GuardarUsuario(UserX.get());
+            }
+        }    
+        return U;
+    }
+    
+    public boolean EliminarUser(int id){
+         Optional<Users> UserX=BuscarUser(id);
+         if(UserX.isPresent()){
+            UsersRepository.EliminarUsuario(id);
+            return true;
+        }
+        return false;  
+    }   
 }

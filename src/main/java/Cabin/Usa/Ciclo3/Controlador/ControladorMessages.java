@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/Message")
-@CrossOrigin(origins="*", methods={RequestMethod.GET, RequestMethod.POST})
+@CrossOrigin(origins="*", methods={RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class ControladorMessages {
     
     @Autowired
@@ -26,10 +26,21 @@ public class ControladorMessages {
         return MessageServices.BuscarMensaje(id);
     }
     
-    
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
     public Message GuardarMensaje(@RequestBody Message M){
         return MessageServices.GuardarMensaje(M);
+    }
+    
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Message ActualizarMensaje(@RequestBody Message M){
+        return MessageServices.ActualizarMensaje(M);
+    }
+    
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean BorrarMensaje(@PathVariable("id") int id){
+        return MessageServices.EliminarMensaje(id);
     }
 }

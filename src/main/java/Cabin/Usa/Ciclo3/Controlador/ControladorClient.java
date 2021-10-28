@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/Client")
-@CrossOrigin(origins="*", methods={RequestMethod.GET, RequestMethod.POST})
+@CrossOrigin(origins="*", methods={RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class ControladorClient {
     
     @Autowired
@@ -25,11 +25,22 @@ public class ControladorClient {
     public Optional<Cliente> BuscarClientes(@PathVariable("id") int id){
         return ClienteServices.BuscarCliente(id);
     }
-    
-    
+     
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
     public Cliente GuardarCliente(@RequestBody Cliente C){
         return ClienteServices.GuardarCliente(C);
+    }
+    
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Cliente ActualizarCliente(@RequestBody Cliente C){
+        return ClienteServices.ActualizarCliente(C);
+    }
+    
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean BorrarCliente(@PathVariable("id") int id){
+        return ClienteServices.EliminarCliente(id);
     }
 }

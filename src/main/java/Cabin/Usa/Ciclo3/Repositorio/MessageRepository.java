@@ -24,4 +24,7 @@ public class MessageRepository {
         return MessageCRUD.save(M);
     }
    
+    public void EliminarMensaje(int id){
+        MessageCRUD.deleteById(id);
+    }
 }

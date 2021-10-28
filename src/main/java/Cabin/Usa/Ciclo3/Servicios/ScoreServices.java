@@ -35,5 +35,28 @@ public class ScoreServices {
                 return S;
             }     
         }
-    }  
+    } 
+    
+    public Score ActualizarScore(Score S){
+        if (S.getId()!=null){
+            Optional<Score> ScoreX=ScoreRepository.BuscarScore(S.getId());
+            if (ScoreX.isPresent()){
+                if(S.getScore()!=null && S.getMensajecalif()!=null){
+                    ScoreX.get().setScore(S.getScore());
+                    ScoreX.get().setMensajecalif(S.getMensajecalif());
+                }
+                return ScoreRepository.GuardarScore(ScoreX.get());
+            }
+        }    
+        return S;
+    }
+    
+    public boolean EliminarScore(int id){
+         Optional<Score> ScoreX=BuscarScore(id);
+         if(ScoreX.isPresent()){
+            ScoreRepository.EliminarScore(id);
+            return true;
+        }
+        return false;  
+    }   
 }

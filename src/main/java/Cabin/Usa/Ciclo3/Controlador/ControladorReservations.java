@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/Reservation")
-@CrossOrigin(origins="*", methods={RequestMethod.GET, RequestMethod.POST})
+@CrossOrigin(origins="*", methods={RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class ControladorReservations {
     
     @Autowired
@@ -26,10 +26,21 @@ public class ControladorReservations {
         return ReservationServices.BuscarReservacion(id);
     }
     
-    
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
     public Reservation GuardarReservacion(@RequestBody Reservation R){
         return ReservationServices.GuardarReservacion(R);
+    }
+    
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Reservation ActualizarReservacion(@RequestBody Reservation R){
+        return ReservationServices.ActualizarReservacion(R);
+    }
+    
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean BorrarReservacion(@PathVariable("id") int id){
+        return ReservationServices.EliminarReservacion(id);
     }
 }

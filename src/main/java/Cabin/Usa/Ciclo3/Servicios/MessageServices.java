@@ -35,5 +35,27 @@ public class MessageServices {
                 return M;
             }     
         }
-    }  
+    }
+    
+    public Message ActualizarMensaje(Message M){
+        if (M.getIdMessage()!=null){
+            Optional<Message> MessageX=MessageRepository.BuscarMensaje(M.getIdMessage());
+            if (MessageX.isPresent()){
+                if(M.getMessageText()!=null){
+                    MessageX.get().setMessageText(M.getMessageText());
+                }
+                return MessageRepository.GuardarMensaje(MessageX.get());
+            }
+        }    
+        return M;
+    }
+    
+    public boolean EliminarMensaje(int id){
+         Optional<Message> MessageX=BuscarMensaje(id);
+         if(MessageX.isPresent()){
+            MessageRepository.EliminarMensaje(id);
+            return true;
+        }
+        return false;  
+    }   
 }

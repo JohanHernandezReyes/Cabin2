@@ -20,7 +20,7 @@ public class CabinServices {
     public Optional<Cabin> BuscarCabaña(int id){
         return CabinRepository.BuscarCabaña(id);
     }
-    
+        
     public Cabin GuardarCabaña(Cabin C){
         if (C.getId()==null){
             return CabinRepository.GuardarCabaña(C);
@@ -33,4 +33,30 @@ public class CabinServices {
             }     
         }
     }  
+
+    public Cabin ActualizarCabaña(Cabin C){
+        if (C.getId()!=null){
+            Optional<Cabin> CabinX=CabinRepository.BuscarCabaña(C.getId());
+            if (CabinX.isPresent()){
+                if(C.getBrand()!=null && C.getDescription()!=null && C.getName()!=null && C.getRooms()!=null){
+                    CabinX.get().setBrand(C.getBrand());
+                    CabinX.get().setDescription(C.getDescription());
+                    CabinX.get().setName(C.getName());
+                    CabinX.get().setRooms(C.getRooms());
+                }
+                return CabinRepository.GuardarCabaña(CabinX.get());
+            }
+        }    
+        return C;
+    }
+    
+    public boolean EliminarCabaña(int id){
+         Optional<Cabin> CabinX=BuscarCabaña(id);
+         if(CabinX.isPresent()){
+            CabinRepository.EliminarCabaña(id);
+            return true;
+        }
+        return false;  
+    }   
+    
 }

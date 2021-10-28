@@ -23,5 +23,8 @@ public class ScoreRepository {
     public Score GuardarScore(Score S){
         return ScoreCRUD.save(S);
     }
-   
+    
+    public void EliminarScore(int id){
+        ScoreCRUD.deleteById(id);
+    }
 }

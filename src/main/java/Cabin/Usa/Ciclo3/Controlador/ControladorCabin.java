@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/Cabin")
-@CrossOrigin(origins="*", methods={RequestMethod.GET, RequestMethod.POST})
+@CrossOrigin(origins="*", methods={RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class ControladorCabin {
     
     @Autowired
@@ -29,7 +29,20 @@ public class ControladorCabin {
     
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public Cabin GuardarCliente(@RequestBody Cabin C){
+    public Cabin GuardarCabaña(@RequestBody Cabin C){
         return CabinServices.GuardarCabaña(C);
     }
+    
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Cabin ActualizarCabaña(@RequestBody Cabin C){
+        return CabinServices.ActualizarCabaña(C);
+    }
+    
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean BorrarCabaña(@PathVariable("id") int id){
+        return CabinServices.EliminarCabaña(id);
+    }
+    
 }
